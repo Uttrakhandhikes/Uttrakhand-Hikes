@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UTTRAKHAND HIKES | Trek the Himalayas</title>
+<meta name="description" content="UTTRAKHAND HIKES - Explore the Himalayan trails of Uttarakhand. Discover treks, compare difficulty, altitude, duration and seasons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#0d382f;--green2:#164d42;--cream:#f4f1e8;--paper:#fff;--ink:#18201e;--muted:#68736e;--gold:#c89a45;--line:#dfe4df;--shadow:0 16px 50px rgba(10,35,29,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+h1,h2,h3,h4{font-family:Manrope,sans-serif}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+img{max-width:100%;display:block}
+.container{width:min(1180px,92%);margin:auto}
+.topbar{background:#082b24;color:#dfe9e4;font-size:12px;padding:8px 0}
+.topbar .container{display:flex;justify-content:space-between;gap:15px}
+.nav{position:absolute;z-index:20;left:0;right:0;top:33px;color:#fff}
+.navinner{height:78px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px;font:800 20px Manrope;letter-spacing:1.3px}
+.logoMark{width:40px;height:40px;border:1px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center}
+.navlinks{display:flex;gap:27px;align-items:center;font-size:13px;font-weight:700}
+.navlinks a:hover{color:#f2c76c}
+.navcta{border:1px solid rgba(255,255,255,.65);padding:10px 17px;border-radius:25px}
+.menu{display:none;background:none;border:0;color:#fff;font-size:26px}
+.hero{min-height:720px;height:90vh;display:flex;align-items:center;position:relative;color:#fff;background:linear-gradient(90deg,rgba(4,23,19,.88),rgba(4,23,19,.45),rgba(4,23,19,.10)),url("https://images.unsplash.com/photo-1661623031407-23d1115e671c?auto=format&fit=crop&w=2200&q=88") center/cover}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:150px;background:linear-gradient(transparent,rgba(0,0,0,.35))}
+.heroContent{position:relative;z-index:2;max-width:790px;padding-top:80px}
+.kicker{display:inline-flex;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:8px 13px;border-radius:30px;font-size:12px;font-weight:800;letter-spacing:1.3px;margin-bottom:22px}
+.hero h1{font-size:clamp(46px,7vw,84px);line-height:.98;letter-spacing:-4px;margin-bottom:22px}
+.hero h1 span{color:#efc466}
+.hero p{font-size:18px;max-width:650px;color:rgba(255,255,255,.85);margin-bottom:30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:28px;padding:14px 22px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s}
+.btn:hover{transform:translateY(-2px)}
+.primary{background:#e2b55d;color:#17362f}
+.outline{border:1px solid rgba(255,255,255,.65);color:#fff;background:rgba(255,255,255,.05)}
+.stats{position:absolute;z-index:5;bottom:28px;left:0;right:0;color:#fff}
+.statrow{display:flex;gap:44px}
+.stat strong{font:800 23px Manrope;display:block}.stat small{font-size:11px;color:#d5ded9}
+.section{padding:90px 0}.cream{background:var(--cream)}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#a8792f;font-weight:900;margin-bottom:11px}
+.heading{max-width:760px;margin-bottom:40px}.heading h2{font-size:clamp(34px,5vw,56px);line-height:1.03;letter-spacing:-2.4px;margin-bottom:14px}.heading p{color:var(--muted);max-width:650px}
+.filterbar{background:#fff;border:1px solid var(--line);padding:18px;border-radius:16px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr auto;gap:10px;margin-bottom:28px;box-shadow:0 8px 30px rgba(0,0,0,.04)}
+.filterbar input,.filterbar select{border:1px solid #d8dfda;border-radius:10px;padding:12px 13px;background:#fff;color:#29332f;outline:none}
+.clear{background:var(--green);color:#fff;border:0;border-radius:10px;padding:0 16px;cursor:pointer;font-weight:700}
+.trekGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border:1px solid #e5e8e5;border-radius:15px;overflow:hidden;transition:.3s;box-shadow:0 5px 22px rgba(0,0,0,.04)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.cardImg{height:235px;position:relative;overflow:hidden}.cardImg img{width:100%;height:100%;object-fit:cover;transition:.5s}.card:hover .cardImg img{transform:scale(1.05)}
+.pill{position:absolute;left:13px;top:13px;background:#fff;color:#173c34;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:.5px}
+.cardBody{padding:20px}.cardBody h3{font-size:21px;margin-bottom:4px}.place{color:#7a8580;font-size:12px;margin-bottom:15px}.meta{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #edf0ed;padding-top:14px;gap:8px}.meta b{font-size:11px;display:block;color:#303a36}.meta span{font-size:10px;color:#7a8580}
+.cardFooter{display:flex;justify-content:space-between;align-items:center;margin-top:18px}.details{color:#a8792f;font-weight:800;font-size:12px}.waSmall{background:#eaf5ee;color:#17613d;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:800}
+.empty{padding:40px;text-align:center;color:var(--muted);display:none}
+.compare{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.compareGrid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:1px;background:#dfe4df;border:1px solid #dfe4df;border-radius:14px;overflow:hidden}
+.compareGrid div{background:#fff;padding:13px 15px;font-size:12px}.compareGrid .head{font-weight:800;background:#f7f8f6}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}.photoLarge{height:560px;border-radius:18px;overflow:hidden}.photoLarge img{width:100%;height:100%;object-fit:cover}
+.featureList{display:grid;gap:22px}.feature{display:flex;gap:15px}.icon{width:48px;height:48px;flex:none;border-radius:50%;background:#e8f0eb;display:grid;place-items:center;font-size:20px}.feature h3{font-size:17px;margin-bottom:3px}.feature p{font-size:13px;color:var(--muted)}
+.dark{background:var(--green);color:#fff}.dark .heading p{color:#b9c8c2}
+.storyGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:25px}.story{min-height:430px;border-radius:17px;overflow:hidden;position:relative;background:center/cover}.story:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.72))}
+.storyText{position:absolute;z-index:2;left:25px;right:25px;bottom:24px}.storyText h3{font-size:27px}.storyText p{color:#e4ebe8;font-size:13px}
+.gallery{display:grid;grid-template-columns:1.5fr 1fr 1fr;grid-template-rows:220px 220px;gap:12px}.g{border-radius:12px;overflow:hidden}.g:first-child{grid-row:span 2}.g img{width:100%;height:100%;object-fit:cover;transition:.4s}.g:hover img{transform:scale(1.05)}
+.contact{background:#f5f2e9}.contactGrid{display:grid;grid-template-columns:1fr .8fr;gap:50px;align-items:center}.contactCard{background:#fff;padding:30px;border-radius:18px;box-shadow:var(--shadow)}.contactLine{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid #ecefeb}.contactLine:last-child{border:0}.phone{font:800 34px Manrope;color:var(--green)}
+footer{background:#061d18;color:#fff;padding:55px 0 25px}.footGrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;padding-bottom:35px;border-bottom:1px solid rgba(255,255,255,.1)}footer p,footer li{color:#9aaba5;font-size:13px}footer ul{list-style:none;display:grid;gap:8px}.footBottom{display:flex;justify-content:space-between;color:#70827c;font-size:11px;padding-top:20px}
+.float{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;font-size:25px;z-index:80;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+.adminBtn{position:fixed;left:18px;bottom:18px;z-index:81;border:0;background:#fff;color:#173c34;border-radius:20px;padding:8px 12px;font-size:11px;font-weight:800;box-shadow:0 5px 20px rgba(0,0,0,.15);cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}
+.panel{width:min(760px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:26px}.panelTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.close{border:0;background:#eef2ef;width:35px;height:35px;border-radius:50%;cursor:pointer}.login{max-width:390px}.login input,.adminForm input,.adminForm select{width:100%;padding:12px;border:1px solid #d6ddd8;border-radius:9px;margin:7px 0 13px}.adminGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.adminItem{border:1px solid #e1e6e2;border-radius:12px;padding:13px}.adminItem img{height:130px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:9px}.adminItem input[type=file]{font-size:11px;width:100%}.adminActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.adminMsg{font-size:12px;color:#43725e;margin-top:10px}
+@media(max-width:900px){.navlinks{display:none;position:absolute;top:68px;left:4%;right:4%;background:#0b3028;padding:22px;border-radius:14px;flex-direction:column}.navlinks.open{display:flex}.menu{display:block}.filterbar{grid-template-columns:1fr 1fr}.trekGrid{grid-template-columns:1fr 1fr}.split,.contactGrid,.storyGrid{grid-template-columns:1fr}.footGrid{grid-template-columns:1fr 1fr}.photoLarge{height:400px}}
+@media(max-width:600px){.topbar .container{display:none}.hero{min-height:690px}.hero h1{letter-spacing:-2px}.statrow{gap:18px}.stat strong{font-size:18px}.filterbar{grid-template-columns:1fr}.trekGrid{grid-template-columns:1fr}.compareGrid{grid-template-columns:1fr 1fr}.compareGrid div:nth-child(n+7){display:none}.gallery{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px}.gallery .g:first-child{grid-row:span 2}.footGrid{grid-template-columns:1fr}.footBottom{flex-direction:column;gap:7px}.adminGrid{grid-template-columns:1fr}}
+
+.bookingBtn{background:var(--green);color:#fff;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:800;border:0;cursor:pointer}
+.bookingBtn:hover{transform:translateY(-1px)}
+.adminTabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid #e5e9e6;padding-bottom:12px}
+.adminTab{border:1px solid #dfe5e1;background:#f7f9f7;color:#173c34;border-radius:20px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}
+.adminTab.active{background:var(--green);color:#fff}
+.adminSection{display:none}.adminSection.active{display:block}
+.kpiGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.kpi{background:#f7f9f7;border:1px solid #e1e7e3;border-radius:12px;padding:14px}.kpi b{display:block;font:800 24px Manrope;color:var(--green)}.kpi span{font-size:10px;color:#68736e}
+.adminTable{width:100%;border-collapse:collapse;font-size:11px}.adminTable th,.adminTable td{padding:9px;border-bottom:1px solid #e8ece9;text-align:left;vertical-align:top}.adminTable th{background:#f7f9f7}
+.status{display:inline-block;border-radius:14px;padding:4px 8px;font-size:9px;font-weight:900}.pending{background:#fff2d7;color:#8a5b0b}.approved{background:#e4f4e9;color:#17613d}.rejected{background:#fde8e8;color:#9a2d2d}.completed{background:#e7edf7;color:#31527d}
+.adminForm textarea{width:100%;padding:12px;border:1px solid #d6ddd8;border-radius:9px;margin:7px 0 13px;min-height:80px;resize:vertical}
+.adminForm label{font-size:11px;font-weight:800;color:#34423d}
+.photoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.photoItem{border:1px solid #e1e6e2;border-radius:12px;padding:11px}.photoItem img{height:110px;width:100%;object-fit:cover;border-radius:8px;margin:7px 0}
+.packageList{display:grid;gap:10px}.packageRow{border:1px solid #e1e6e2;border-radius:12px;padding:12px;display:grid;grid-template-columns:1.6fr 1fr 1fr auto;gap:8px;align-items:center}
+.packageRow input,.packageRow select{padding:9px;border:1px solid #d6ddd8;border-radius:8px;width:100%}
+.bookingForm{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bookingForm .full{grid-column:1/-1}
+.bookingForm label{font-size:11px;font-weight:800;color:#34423d;display:block;margin-bottom:4px}.bookingForm input,.bookingForm select,.bookingForm textarea{width:100%;padding:11px;border:1px solid #d6ddd8;border-radius:9px}.bookingForm textarea{min-height:90px}
+@media(max-width:700px){.kpiGrid{grid-template-columns:1fr 1fr}.photoGrid{grid-template-columns:1fr 1fr}.packageRow{grid-template-columns:1fr}.bookingForm{grid-template-columns:1fr}.bookingForm .full{grid-column:auto}}
+
+.saveBar{border:1px solid #dfe6e1}.pendingBadge{display:inline-block;background:#fff3cd;color:#7a5b00;border:1px solid #f0d88a;border-radius:20px;padding:3px 7px;font-size:9px;font-weight:800}.trekPhotoCard{border:1px solid #e1e6e2;border-radius:12px;padding:12px;background:#fff}.trekPhotoCard img{height:150px;width:100%;object-fit:cover;border-radius:9px;margin:8px 0}.trekPhotoCard input{width:100%;padding:9px;border:1px solid #d6ddd8;border-radius:8px;margin:5px 0;font-size:11px}.trekPhotoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:900px){.trekPhotoGrid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.trekPhotoGrid{grid-template-columns:1fr}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="topbar"><div class="container"><span>UTTRAKHAND HIKES • HIMALAYAN TREKKING COMMUNITY</span><span>📞 +91 97204 51910 • ✉ shubhamnegi301298@gmail.com</span></div></div>
+
+<header class="nav"><div class="container navinner">
+<a class="logo" href="#"><span class="logoMark">▲</span>UTTRAKHAND HIKES</a>
+<nav class="navlinks" id="navlinks">
+<a href="#treks">TREKS</a><a href="#guide">TREK GUIDE</a><a href="#stories">EXPERIENCES</a><a href="#gallery">GALLERY</a><a href="#about">ABOUT</a><a class="navcta" href="#contact">CONTACT</a>
+</nav><button class="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+</div></header>
+
+<section class="hero" id="home">
+<div class="container heroContent">
+<div class="kicker">🏔️ TREK • EXPLORE • RESPECT THE HIMALAYAS</div>
+<h1>THE MOUNTAINS<br>ARE <span>WAITING.</span></h1>
+<p>Discover Uttarakhand through carefully selected Himalayan trails, alpine meadows, forests, passes and summit experiences.</p>
+<div class="actions"><a class="btn primary" href="#treks">EXPLORE TREKS →</a><a class="btn outline" href="tel:+919720451910">📞 TALK TO US</a></div>
+</div>
+<div class="stats"><div class="container statrow"><div class="stat"><strong>10+</strong><small>UTTARAKHAND TREKS</small></div><div class="stat"><strong>5,000m+</strong><small>HIGH ALTITUDE</small></div><div class="stat"><strong>365</strong><small>DAYS OF ADVENTURE</small></div></div></div>
+</section>
+
+<section class="section cream" id="treks">
+<div class="container">
+<div class="heading"><div class="eyebrow">TREK LIBRARY</div><h2>Find a trek that fits you.</h2><p>Browse by difficulty, duration, season and altitude. Start with an easy meadow walk or work your way toward higher Himalayan passes.</p></div>
+<div class="filterbar">
+<input id="search" placeholder="Search a trek..." oninput="renderTreks()">
+<select id="difficulty" onchange="renderTreks()"><option value="">All difficulty</option><option>Easy</option><option>Easy - Moderate</option><option>Moderate</option><option>Moderate - Difficult</option><option>Difficult</option></select>
+<select id="type" onchange="renderTreks()"><option value="">All categories</option><option>Trek</option><option>Char Dham</option><option>Panch Kedar</option></select><select id="season" onchange="renderTreks()"><option value="">All seasons</option><option>Winter</option><option>Spring</option><option>Summer</option><option>Monsoon</option><option>Autumn</option></select>
+<select id="duration" onchange="renderTreks()"><option value="">All durations</option><option value="4">4-5 days</option><option value="5">5-6 days</option><option value="6">6-7 days</option><option value="7">7+ days</option></select>
+<button class="clear" onclick="clearFilters()">RESET</button>
+</div>
+<div class="trekGrid" id="trekGrid"></div>
+<div class="empty" id="empty">No treks match those filters.</div>
+</div>
+</section>
+
+<section class="section compare" id="guide">
+<div class="container">
+<div class="heading"><div class="eyebrow">QUICK COMPARISON</div><h2>Compare before you go.</h2><p>Use the essentials below to shortlist your next Himalayan experience.</p></div>
+<div class="compareGrid">
+<div class="head">TREK</div><div class="head">DIFFICULTY</div><div class="head">DURATION</div><div class="head">ALTITUDE</div>
+<div>Kedarkantha</div><div>Moderate</div><div>5-6 days</div><div>12,500 ft</div>
+<div>Dayara Bugyal</div><div>Easy - Moderate</div><div>4-5 days</div><div>11,830 ft</div>
+<div>Kuari Pass</div><div>Moderate</div><div>5-6 days</div><div>12,516 ft</div>
+<div>Valley of Flowers</div><div>Easy - Moderate</div><div>5-6 days</div><div>14,107 ft*</div>
+</div>
+<p style="font-size:10px;color:#7a8580;margin-top:10px">*Planning figures are indicative. Always confirm current route, permits, weather and local conditions before departure.</p>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="container split">
+<div class="photoLarge"><img id="aboutImg" src="https://static.wixstatic.com/media/cf3d4b_3caeb033e2204e33a73717f85919b34b~mv2.jpeg/v1/fill/w_1200,h_900,al_c,q_85/Village%20Walk%20%284%29.jpeg" alt="Trekkers walking on a Himalayan ridge"></div>
+<div><div class="heading"><div class="eyebrow">WHY UTTRAKHAND HIKES</div><h2>More than reaching the summit.</h2><p>Our focus is on the complete mountain experience — preparation, people, trails, local landscapes and responsible trekking.</p></div>
+<div class="featureList">
+<div class="feature"><div class="icon">🧭</div><div><h3>Curated Himalayan trails</h3><p>Explore a growing collection of Uttarakhand trekking routes.</p></div></div>
+<div class="feature"><div class="icon">🥾</div><div><h3>For different experience levels</h3><p>Choose from easier meadow trails to challenging high-altitude passes.</p></div></div>
+<div class="feature"><div class="icon">🛡️</div><div><h3>Plan responsibly</h3><p>Know your route, fitness requirements, weather, permits and local guidance before you trek.</p></div></div>
+<div class="feature"><div class="icon">🌱</div><div><h3>Leave the mountains better</h3><p>Carry back what you carry in and respect local communities and fragile ecosystems.</p></div></div>
+</div></div>
+</div>
+</section>
+
+<section class="section dark" id="stories">
+<div class="container">
+<div class="heading"><div class="eyebrow" style="color:#e2b55d">MOUNTAIN EXPERIENCES</div><h2>Three ways to experience Uttarakhand.</h2><p>Build the adventure around your interests — snow, meadows, forests, villages and big mountain views.</p></div>
+<div class="storyGrid">
+<div class="story" id="story1" style="background-image:url('https://images.unsplash.com/photo-1661623031407-23d1115e671c?auto=format&fit=crop&w=1400&q=88')"><div class="storyText"><h3>Chase the snow</h3><p>Winter trails through quiet forests and snow-covered ridges.</p></div></div>
+<div class="story" id="story2" style="background-image:url('https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1000&q=88')"><div class="storyText"><h3>Walk the bugyals</h3><p>Wide alpine meadows, open skies and Himalayan panoramas.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="gallery">
+<div class="container"><div class="heading"><div class="eyebrow">TRAIL MOMENTS</div><h2>Real mountain atmosphere.</h2><p>Use the Admin panel to replace these images with your own trek photographs.</p></div>
+<div class="gallery">
+<div class="g"><img id="gallery1" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=88"></div>
+<div class="g"><img id="gallery2" src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=88"></div>
+<div class="g"><img id="gallery3" src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1000&q=88"></div>
+<div class="g"><img id="gallery4" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=88"></div>
+<div class="g"><img id="gallery5" src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=88"></div>
+</div></div>
+</section>
+
+<section class="section contact" id="contact">
+<div class="container contactGrid">
+<div><div class="eyebrow">PLAN YOUR ADVENTURE</div><h2 style="font-size:clamp(38px,5vw,60px);line-height:1.02;letter-spacing:-2px;margin-bottom:15px">Ready for the trail?</h2><p style="color:var(--muted);max-width:580px;margin-bottom:25px">Call or WhatsApp UTTRAKHAND HIKES to discuss your trek, group size, preferred season and route.</p><a class="btn" style="background:var(--green);color:#fff" href="https://wa.me/919720451910" target="_blank">WHATSAPP US →</a></div>
+<div class="contactCard"><div class="contactLine"><span>📞</span><a href="tel:+919720451910"><b>+91 97204 51910</b></a></div><div class="contactLine"><span>💬</span><a href="https://wa.me/919720451910" target="_blank">WhatsApp UTTRAKHAND HIKES</a></div><div class="contactLine"><span>✉️</span><a href="mailto:shubhamnegi301298@gmail.com">shubhamnegi301298@gmail.com</a></div></div>
+</div>
+</section>
+
+<footer>
+<div class="container"><div class="footGrid">
+<div><div class="logo" style="margin-bottom:13px"><span class="logoMark">▲</span>UTTRAKHAND HIKES</div><p>Explore the Himalayas. Discover yourself. A trekking community built around Uttarakhand.</p></div>
+<div><h4>Explore</h4><ul><li><a href="#treks">Treks</a></li><li><a href="#guide">Trek Guide</a></li><li><a href="#stories">Experiences</a></li><li><a href="#gallery">Gallery</a></li></ul></div>
+<div><h4>Connect</h4><ul><li><a href="tel:+919720451910">+91 97204 51910</a></li><li><a href="mailto:shubhamnegi301298@gmail.com">Email us</a></li><li><a href="https://wa.me/919720451910" target="_blank">WhatsApp</a></li></ul></div>
+</div><div class="footBottom"><span>© <span id="year"></span> UTTRAKHAND HIKES</span><span>EXPLORE • RESPECT • EXPERIENCE</span></div></div>
+</footer>
+
+<a class="float" href="https://wa.me/919720451910" target="_blank" aria-label="WhatsApp">💬</a>
+<button class="adminBtn" onclick="openAdmin()">⚙ ADMIN</button>
+
+
+<div class="modal" id="bookingModal">
+  <div class="panel" style="max-width:720px">
+    <div class="panelTop"><div><h3>Book Your Himalayan Experience</h3><p style="font-size:12px;color:#68736e">Submit your request. Your booking will be confirmed after admin approval.</p></div><button class="close" onclick="closeBooking()">×</button></div>
+    <form class="bookingForm" onsubmit="submitBooking(event)">
+      <div><label>Full Name *</label><input id="bName" required></div>
+      <div><label>Mobile Number *</label><input id="bPhone" required type="tel"></div>
+      <div><label>Email</label><input id="bEmail" type="email"></div>
+      <div><label>Trek / Yatra *</label><select id="bTrek" required onchange="updateBookingTotal()"></select></div>
+      <div><label>Travel Date *</label><input id="bDate" required type="date"></div>
+      <div><label>No. of Persons *</label><input id="bPersons" required type="number" min="1" value="1" onchange="updateBookingTotal()"></div>
+      <div class="full"><label>Special Requirements</label><textarea id="bNotes" placeholder="Pickup, dietary needs, group details, etc."></textarea></div>
+      <div class="full" style="background:#f7f9f7;padding:14px;border-radius:10px"><b>Estimated Package Total: ₹<span id="bTotal">0</span></b><div style="font-size:10px;color:#68736e;margin-top:4px">Final amount is confirmed by UTTRAKHAND HIKES after availability review.</div></div>
+      <div class="full"><button class="btn" style="background:var(--green);color:#fff;width:100%">SUBMIT BOOKING REQUEST</button></div>
+      <p id="bookingMsg" class="adminMsg full"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="adminModal">
+  <div class="panel login" id="loginPanel">
+    <div class="panelTop"><h3>Admin Access</h3><button class="close" onclick="closeAdmin()">×</button></div>
+    <p style="font-size:12px;color:#68736e;margin-bottom:10px">Secure cloud administration powered by Supabase.</p>
+    <input id="adminEmail" type="email" autocomplete="username" placeholder="Admin email" value="shubhamnegi301298@gmail.com">
+    <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Admin password">
+    <button class="btn" style="background:var(--green);color:#fff;width:100%" onclick="loginAdmin()">LOGIN</button>
+    <p id="loginMsg" class="adminMsg"></p>
+  </div>
+  <div class="panel" id="adminPanel" style="display:none">
+    <div class="panelTop"><div><h3>UTTRAKHAND HIKES — Admin Console</h3><p style="font-size:12px;color:#68736e">Manage bookings, packages, treks, photos and website content.</p></div><button class="close" onclick="closeAdmin()">×</button></div>
+    <div class="saveBar" style="position:sticky;top:0;z-index:5;background:#fff;border:1px solid #dfe6e1;border-radius:12px;padding:10px 12px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 6px 18px rgba(10,35,29,.06)">
+      <div><b>Cloud changes</b><div id="saveState" style="font-size:11px;color:#68736e;margin-top:2px">No unsaved changes</div></div>
+      <button id="saveAllBtn" class="btn" style="background:#0d382f;color:#fff" onclick="saveAllChanges()">💾 SAVE ALL CHANGES</button>
+    </div>
+    <div class="adminTabs">
+      <button class="adminTab active" onclick="adminTab('dashboard',this)">DASHBOARD</button>
+      <button class="adminTab" onclick="adminTab('bookings',this)">BOOKINGS</button>
+      <button class="adminTab" onclick="adminTab('packages',this)">PACKAGES & PRICES</button>
+      <button class="adminTab" onclick="adminTab('treks',this)">ADD / EDIT TREKS</button>
+      <button class="adminTab" onclick="adminTab('photos',this)">PHOTOS</button>
+      <button class="adminTab" onclick="adminTab('content',this)">WEBSITE DATA</button>
+      <button class="adminTab" onclick="adminTab('settings',this)">SETTINGS</button>
+    </div>
+
+    <div id="tab-dashboard" class="adminSection active">
+      <div class="kpiGrid">
+        <div class="kpi"><b id="kBookings">0</b><span>TOTAL BOOKINGS</span></div>
+        <div class="kpi"><b id="kPending">0</b><span>PENDING APPROVAL</span></div>
+        <div class="kpi"><b id="kRevenue">₹0</b><span>APPROVED VALUE</span></div>
+        <div class="kpi"><b id="kVisitors">0</b><span>VISITS</span></div>
+      </div>
+      <div class="adminItem"><b>Regular Summary</b><p id="adminSummary" style="font-size:12px;color:#68736e;margin-top:8px"></p><p style="font-size:10px;color:#8a938f;margin-top:7px">Dashboard refreshes automatically every 30 seconds while open.</p></div>
+    </div>
+
+    <div id="tab-bookings" class="adminSection">
+      <div class="adminItem"><b>Booking Approval</b><div style="overflow:auto;margin-top:10px"><table class="adminTable"><thead><tr><th>ID</th><th>Customer</th><th>Trip</th><th>Date</th><th>Persons</th><th>Amount</th><th>Status / Action</th></tr></thead><tbody id="bookingRows"></tbody></table></div></div>
+    </div>
+
+    <div id="tab-packages" class="adminSection">
+      <div class="adminItem"><b>Update Trek Packages & Prices</b><p style="font-size:11px;color:#68736e;margin:5px 0 12px">Change the price or duration and publish. Customer booking prices update immediately on this browser.</p><div class="packageList" id="packageList"></div></div>
+    </div>
+
+    <div id="tab-treks" class="adminSection">
+      <div class="adminItem">
+        <b>Add / Update Trek or Yatra</b>
+        <form class="adminForm" onsubmit="saveTrek(event)" style="margin-top:10px">
+          <input type="hidden" id="editTrekIndex" value="-1">
+          <div class="adminGrid">
+            <div><label>Name</label><input id="tName" required></div><div><label>Location</label><input id="tPlace" required></div>
+            <div><label>Category</label><select id="tType"><option>Trek</option><option>Char Dham</option><option>Panch Kedar</option></select></div>
+            <div><label>Difficulty</label><select id="tDifficulty"><option>Easy</option><option>Easy - Moderate</option><option>Moderate</option><option>Moderate - Difficult</option><option>Difficult</option><option>Expert</option></select></div>
+            <div><label>Duration</label><input id="tDays" placeholder="5-6 days" required></div><div><label>Altitude</label><input id="tAlt" placeholder="12,500 ft"></div>
+            <div><label>Season</label><input id="tSeason" placeholder="Summer"></div><div><label>Package Price (₹)</label><input id="tPrice" type="number" min="0" value="0"></div>
+            <div><label>Badge</label><input id="tTag" placeholder="POPULAR"></div><div><label>Image URL</label><input id="tImg" placeholder="https://..."></div>
+          </div>
+          <div class="adminActions"><button class="btn" style="background:var(--green);color:#fff">SAVE TREK</button><button type="button" class="btn" style="background:#eef2ef;color:#173c34" onclick="clearTrekForm()">NEW TREK</button></div>
+          <p id="trekMsg" class="adminMsg"></p>
+        </form>
+      </div>
+      <div class="adminItem" style="margin-top:12px"><b>Current Trek Library</b><div style="overflow:auto;margin-top:10px"><table class="adminTable"><thead><tr><th>Name</th><th>Category</th><th>Price</th><th>Action</th></tr></thead><tbody id="trekRows"></tbody></table></div></div>
+    </div>
+
+    <div id="tab-photos" class="adminSection">
+      <div class="adminItem" style="margin-bottom:12px">
+        <b>Trek Photo Manager</b>
+        <p style="font-size:11px;color:#68736e;margin:5px 0 12px">Change the main photo of any published trek. Changes are only published when you press <b>SAVE ALL CHANGES</b>.</p>
+        <div id="trekPhotoManager" class="photoGrid"></div>
+      </div>
+      <div class="adminItem"><b>Website Photos</b><div style="font-size:11px;color:#68736e;margin:5px 0 12px">Hero, About, Experiences and Gallery photos are also saved to Supabase when you press SAVE ALL CHANGES.</div>
+      <div class="photoGrid">
+        <div class="photoItem"><b>Hero</b><img id="adminHeroPreview"><input type="file" accept="image/*" onchange="setLocalImage('hero',this)"></div>
+        <div class="photoItem"><b>About</b><img id="adminAboutPreview"><input type="file" accept="image/*" onchange="setLocalImage('about',this)"></div>
+        <div class="photoItem"><b>Experience 1</b><img id="adminStory1Preview"><input type="file" accept="image/*" onchange="setLocalImage('story1',this)"></div>
+        <div class="photoItem"><b>Experience 2</b><img id="adminStory2Preview"><input type="file" accept="image/*" onchange="setLocalImage('story2',this)"></div>
+        <div class="photoItem"><b>Gallery 1</b><img id="adminG1"><input type="file" accept="image/*" onchange="setLocalImage('g1',this)"></div>
+        <div class="photoItem"><b>Gallery 2</b><img id="adminG2"><input type="file" accept="image/*" onchange="setLocalImage('g2',this)"></div>
+        <div class="photoItem"><b>Gallery 3</b><img id="adminG3"><input type="file" accept="image/*" onchange="setLocalImage('g3',this)"></div>
+        <div class="photoItem"><b>Gallery 4</b><img id="adminG4"><input type="file" accept="image/*" onchange="setLocalImage('g4',this)"></div>
+        <div class="photoItem"><b>Gallery 5</b><img id="adminG5"><input type="file" accept="image/*" onchange="setLocalImage('g5',this)"></div>
+      </div>
+      <div class="adminActions"><button class="btn" style="background:#eef2ef;color:#173c34" onclick="resetPhotos()">RESET PHOTOS</button></div></div>
+    </div>
+
+    <div id="tab-content" class="adminSection">
+      <div class="adminItem"><b>Website Text & Contact</b><form class="adminForm" onsubmit="saveContent(event)" style="margin-top:10px">
+        <label>Hero Title</label><input id="cHeroTitle">
+        <label>Hero Description</label><textarea id="cHeroDesc"></textarea>
+        <label>About Heading</label><input id="cAboutHeading">
+        <label>About Description</label><textarea id="cAboutDesc"></textarea>
+        <label>Phone</label><input id="cPhone">
+        <label>Email</label><input id="cEmail">
+        <button class="btn" style="background:var(--green);color:#fff">PUBLISH WEBSITE DATA</button>
+      </form></div>
+    </div>
+
+    <div id="tab-settings" class="adminSection">
+      <div class="adminItem"><b>Admin Settings</b><form class="adminForm" onsubmit="changePassword(event)" style="margin-top:10px"><label>New Admin Password</label><input id="newAdminPw" type="password" minlength="6"><button class="btn" style="background:var(--green);color:#fff">CHANGE PASSWORD</button></form><p id="settingsMsg" class="adminMsg"></p></div>
+      <div class="adminActions"><button class="btn" style="background:#eef2ef;color:#173c34" onclick="exportAdminData()">EXPORT ADMIN DATA</button><button class="btn" style="background:#fbe9e9;color:#8d2f2f" onclick="adminLogout()">LOGOUT</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const treks=[
+{name:"Kedarkantha",place:"Sankri, Uttarkashi",difficulty:"Moderate",days:"5-6 days",daysN:5,alt:"12,500 ft",season:"Winter",tag:"POPULAR",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1661623031407-23d1115e671c?auto=format&fit=crop&w=1100&q=88"},
+{name:"Dayara Bugyal",place:"Raithal, Uttarkashi",difficulty:"Easy - Moderate",days:"4-5 days",daysN:4,alt:"11,830 ft",season:"Winter",tag:"BEGINNER",type:"Trek",price:0,img:"https://images.greatadventure.in/v1766559009/Dayara-Bugyal-5_5357163c08/Dayara-Bugyal-5_5357163c08.webp"},
+{name:"Kuari Pass",place:"Chamoli",difficulty:"Moderate",days:"5-6 days",daysN:5,alt:"12,516 ft",season:"Autumn",tag:"VIEWS",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1100&q=88"},
+{name:"Brahmatal",place:"Lohajung, Chamoli",difficulty:"Moderate",days:"5-6 days",daysN:5,alt:"12,250 ft",season:"Winter",tag:"SNOW",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=1100&q=88"},
+{name:"Valley of Flowers",place:"Chamoli",difficulty:"Easy - Moderate",days:"5-6 days",daysN:5,alt:"14,107 ft",season:"Monsoon",tag:"ALPINE",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1100&q=88"},
+{name:"Har Ki Dun",place:"Sankri, Uttarkashi",difficulty:"Moderate",days:"6-7 days",daysN:6,alt:"11,482 ft",season:"Spring",tag:"VALLEY",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1100&q=88"},
+{name:"Nag Tibba",place:"Pantwari, Tehri",difficulty:"Easy",days:"2-3 days",daysN:2,alt:"9,915 ft",season:"Winter",tag:"WEEKEND",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1100&q=88"},
+{name:"Ali Bedni Bugyal",place:"Lohajung, Chamoli",difficulty:"Moderate",days:"5-6 days",daysN:5,alt:"12,500 ft",season:"Summer",tag:"MEADOWS",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1100&q=88"},
+{name:"Chopta–Chandrashila",place:"Chopta, Rudraprayag",difficulty:"Easy - Moderate",days:"3-4 days",daysN:4,alt:"13,123 ft",season:"Winter",tag:"SUMMIT",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1100&q=88"},
+{name:"Bali Pass",place:"Sankri, Uttarkashi",difficulty:"Difficult",days:"7+ days",daysN:7,alt:"16,207 ft",season:"Summer",tag:"CHALLENGE",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1100&q=88"},
+{name:"Dodital–Darwa Pass",place:"Uttarkashi",difficulty:"Moderate",days:"5-6 days",daysN:5,alt:"13,780 ft",season:"Summer",tag:"LAKES",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1100&q=88"},
+{name:"Pindari Glacier",place:"Kumaon Himalaya",difficulty:"Moderate",days:"7-8 days",daysN:7,alt:"12,300 ft",season:"Summer",tag:"GLACIER",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1100&q=88"},
+{name:"Roopkund",place:"Lohajung, Chamoli",difficulty:"Difficult",days:"7-9 days",daysN:7,alt:"16,499 ft",season:"Summer",tag:"HIGH ALTITUDE",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1100&q=88"},
+{name:"Panwali Kantha",place:"Tehri Garhwal",difficulty:"Moderate",days:"6-7 days",daysN:6,alt:"11,500 ft",season:"Summer",tag:"MEADOWS",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1100&q=88"},
+{name:"Sahastratal",place:"Uttarkashi",difficulty:"Difficult",days:"7-8 days",daysN:7,alt:"15,000 ft",season:"Summer",tag:"ALPINE LAKES",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1100&q=88"},
+{name:"Auden's Col",place:"Gangotri–Kedarnath region",difficulty:"Expert",days:"12-14 days",daysN:12,alt:"18,010 ft",season:"Summer",tag:"EXPEDITION",type:"Trek",price:0,img:"https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1100&q=88"},
+{name:"Yamunotri Dham",place:"Uttarkashi",difficulty:"Moderate",days:"2-3 days",daysN:2,alt:"10,800 ft",season:"Summer",tag:"CHAR DHAM",type:"Char Dham",price:0,img:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1100&q=88"},
+{name:"Gangotri Dham",place:"Uttarkashi",difficulty:"Easy - Moderate",days:"2-3 days",daysN:2,alt:"10,200 ft",season:"Summer",tag:"CHAR DHAM",type:"Char Dham",price:0,img:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1100&q=88"},
+{name:"Kedarnath Dham",place:"Rudraprayag",difficulty:"Moderate",days:"3-4 days",daysN:4,alt:"11,755 ft",season:"Summer",tag:"CHAR DHAM",type:"Char Dham",price:0,img:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1100&q=88"},
+{name:"Badrinath Dham",place:"Chamoli",difficulty:"Easy",days:"2-3 days",daysN:2,alt:"10,248 ft",season:"Summer",tag:"CHAR DHAM",type:"Char Dham",price:0,img:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1100&q=88"},
+{name:"Tungnath",place:"Chopta, Rudraprayag",difficulty:"Easy - Moderate",days:"1-2 days",daysN:2,alt:"12,073 ft",season:"Summer",tag:"PANCH KEDAR",type:"Panch Kedar",price:0,img:"https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1100&q=88"},
+{name:"Rudranath",place:"Chamoli",difficulty:"Difficult",days:"5-6 days",daysN:5,alt:"11,800 ft",season:"Summer",tag:"PANCH KEDAR",type:"Panch Kedar",price:0,img:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1100&q=88"},
+{name:"Madhyamaheshwar",place:"Rudraprayag",difficulty:"Moderate",days:"3-4 days",daysN:4,alt:"11,473 ft",season:"Summer",tag:"PANCH KEDAR",type:"Panch Kedar",price:0,img:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1100&q=88"},
+{name:"Kalpeshwar",place:"Chamoli",difficulty:"Easy - Moderate",days:"2-3 days",daysN:2,alt:"7,200 ft",season:"All Season",tag:"PANCH KEDAR",type:"Panch Kedar",price:0,img:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1100&q=88"},
+{name:"Kedarnath",place:"Rudraprayag",difficulty:"Moderate",days:"3-4 days",daysN:4,alt:"11,755 ft",season:"Summer",tag:"PANCH KEDAR",type:"Panch Kedar",price:0,img:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1100&q=88"}
+];
+
+function getTreks(){
+  try{const x=JSON.parse(localStorage.getItem('uh_treks')); if(Array.isArray(x)&&x.length)return x;}catch(e){}
+  return treks;
+}
+function saveTreks(x){localStorage.setItem('uh_treks',JSON.stringify(x))}
+function renderTreks(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  const d=document.getElementById('difficulty').value,s=document.getElementById('season').value,dur=document.getElementById('duration').value,type=document.getElementById('type')?.value||'';
+  const filtered=getTreks().filter(t=>
+    (!q||(t.name+" "+t.place+" "+t.type).toLowerCase().includes(q))&&(!d||t.difficulty===d)&&(!s||t.season===s)&&(!dur||(dur==="7"?Number(t.daysN)>=7:Number(t.daysN)===Number(dur)))&&(!type||t.type===type));
+  const grid=document.getElementById('trekGrid');grid.innerHTML='';
+  filtered.forEach(t=>{grid.innerHTML+=`<article class="card"><div class="cardImg"><img src="${t.img}" alt="${t.name}"><span class="pill">${t.tag||t.type}</span></div><div class="cardBody"><h3>${t.name}</h3><div class="place">📍 ${t.place} · ${t.type}</div><div class="meta"><div><b>${t.difficulty}</b><span>Difficulty</span></div><div><b>${t.days}</b><span>Duration</span></div><div><b>${t.alt||'—'}</b><span>Altitude</span></div></div><div class="cardFooter"><span class="details">${t.season} · ₹${Number(t.price||0).toLocaleString('en-IN')}</span><button class="bookingBtn" onclick="openBooking(${JSON.stringify(t.name)})">BOOK NOW</button></div></div></article>`});
+  document.getElementById('empty').style.display=filtered.length?'none':'block';
+}
+function clearFilters(){['search','difficulty','season','duration','type'].forEach(id=>document.getElementById(id).value='');renderTreks()}
+document.getElementById('year').textContent=new Date().getFullYear();
+
+const DEFAULTS={
+ hero:"https://images.unsplash.com/photo-1661623031407-23d1115e671c?auto=format&fit=crop&w=2200&q=88",
+ about:"https://static.wixstatic.com/media/cf3d4b_3caeb033e2204e33a73717f85919b34b~mv2.jpeg/v1/fill/w_1200,h_900,al_c,q_85/Village%20Walk%20%284%29.jpeg",
+ g1:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=88",
+ g2:"https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=88",
+ g3:"https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1000&q=88",
+ g4:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=88",
+ g5:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=88",
+ story1:"https://images.unsplash.com/photo-1661623031407-23d1115e671c?auto=format&fit=crop&w=1400&q=88",
+ story2:"https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1000&q=88"
+};
+function getPhoto(k){return localStorage.getItem('uh_'+k)||DEFAULTS[k]}
+function applyPhotos(){
+ const hero=getPhoto('hero'),about=getPhoto('about');
+ document.querySelector('.hero').style.backgroundImage=`linear-gradient(90deg,rgba(4,23,19,.88),rgba(4,23,19,.45),rgba(4,23,19,.10)),url("${hero}")`;
+ document.getElementById('aboutImg').src=about;
+ ['g1','g2','g3','g4','g5'].forEach((k,i)=>document.getElementById('gallery'+(i+1)).src=getPhoto(k));
+ document.getElementById('story1').style.backgroundImage=`url("${getPhoto('story1')}")`;
+ document.getElementById('story2').style.backgroundImage=`url("${getPhoto('story2')}")`;
+ const map={hero:'adminHeroPreview',about:'adminAboutPreview',story1:'adminStory1Preview',story2:'adminStory2Preview',g1:'adminG1',g2:'adminG2',g3:'adminG3',g4:'adminG4',g5:'adminG5'};
+ Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.src=getPhoto(k)});
+}
+function openAdmin(){document.getElementById('adminModal').classList.add('show');document.getElementById('loginPanel').style.display='block';document.getElementById('adminPanel').style.display='none';document.getElementById('adminPassword').value='';document.getElementById('loginMsg').textContent=''}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('show')}
+function loginAdmin(){
+ const pw=localStorage.getItem('uh_admin_pw')||'6pjpue85ye';
+ if(document.getElementById('adminPassword').value===pw){document.getElementById('loginPanel').style.display='none';document.getElementById('adminPanel').style.display='block';applyPhotos();loadAdmin();}else document.getElementById('loginMsg').textContent='Incorrect password.';
+}
+function adminLogout(){closeAdmin()}
+function adminTab(name,btn){document.querySelectorAll('.adminSection').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');document.querySelectorAll('.adminTab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');loadAdmin()}
+function setLocalImage(key,input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{localStorage.setItem('uh_'+key,reader.result);applyPhotos()}catch(e){alert('Image is too large for browser storage. Try a smaller JPG/WebP image.')}};reader.readAsDataURL(file)}
+function resetPhotos(){Object.keys(DEFAULTS).forEach(k=>localStorage.removeItem('uh_'+k));applyPhotos()}
+function bookings(){try{return JSON.parse(localStorage.getItem('uh_bookings')||'[]')}catch(e){return[]}}
+function saveBookings(x){localStorage.setItem('uh_bookings',JSON.stringify(x))}
+function openBooking(name){
+ document.getElementById('bookingModal').classList.add('show');const sel=document.getElementById('bTrek');sel.innerHTML=getTreks().map(t=>`<option value="${t.name}" ${t.name===name?'selected':''}>${t.name} — ₹${Number(t.price||0).toLocaleString('en-IN')}</option>`).join('');updateBookingTotal();document.getElementById('bookingMsg').textContent='';
+}
+function closeBooking(){document.getElementById('bookingModal').classList.remove('show')}
+function updateBookingTotal(){const t=getTreks().find(x=>x.name===document.getElementById('bTrek').value);const n=Number(document.getElementById('bPersons').value||1);document.getElementById('bTotal').textContent=(Number(t?.price||0)*n).toLocaleString('en-IN')}
+function submitBooking(e){
+ e.preventDefault();const t=getTreks().find(x=>x.name===document.getElementById('bTrek').value),n=Number(document.getElementById('bPersons').value||1);
+ const id='UHK-'+Date.now().toString().slice(-8);const arr=bookings();arr.push({id,name:document.getElementById('bName').value,phone:document.getElementById('bPhone').value,email:document.getElementById('bEmail').value,trek:t?.name||'',date:document.getElementById('bDate').value,persons:n,amount:Number(t?.price||0)*n,notes:document.getElementById('bNotes').value,status:'Pending',created:new Date().toISOString()});saveBookings(arr);
+ localStorage.setItem('uh_visits',String(Number(localStorage.getItem('uh_visits')||0)+1));
+ document.getElementById('bookingMsg').textContent='Booking request '+id+' submitted. Please wait for admin confirmation.';e.target.reset();document.getElementById('bPersons').value=1;
+}
+function loadAdmin(){renderBookings();renderPackages();renderTrekRows();loadContent();applyPhotos();updateDashboard()}
+function updateDashboard(){const b=bookings(),p=b.filter(x=>x.status==='Pending'),a=b.filter(x=>x.status==='Approved'||x.status==='Completed');document.getElementById('kBookings').textContent=b.length;document.getElementById('kPending').textContent=p.length;document.getElementById('kRevenue').textContent='₹'+a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN');document.getElementById('kVisitors').textContent=localStorage.getItem('uh_visits')||'0';document.getElementById('adminSummary').textContent=`${b.length} booking request(s), ${p.length} awaiting approval and ₹${a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN')} in approved/completed booking value. Last refreshed ${new Date().toLocaleTimeString()}.`}
+function renderBookings(){const rows=document.getElementById('bookingRows');rows.innerHTML=bookings().map((b,i)=>`<tr><td>${b.id}</td><td><b>${b.name}</b><br>${b.phone}<br>${b.email||''}</td><td>${b.trek}</td><td>${b.date}</td><td>${b.persons}</td><td>₹${Number(b.amount||0).toLocaleString('en-IN')}</td><td><span class="status ${b.status.toLowerCase()}">${b.status}</span><div style="margin-top:6px">${b.status==='Pending'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Approved')">APPROVE</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="setBookingStatus(${i},'Rejected')">REJECT</button>`:b.status==='Approved'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Completed')">COMPLETE</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="7">No customer bookings yet.</td></tr>'}
+function setBookingStatus(i,status){const a=bookings();a[i].status=status;a[i].updated=new Date().toISOString();saveBookings(a);loadAdmin()}
+function renderPackages(){document.getElementById('packageList').innerHTML=getTreks().map((t,i)=>`<div class="packageRow"><b>${t.name}</b><input id="price_${i}" type="number" min="0" value="${Number(t.price||0)}" placeholder="Price"><input id="days_${i}" value="${t.days||''}" placeholder="Duration"><button class="bookingBtn" onclick="updatePackage(${i})">PUBLISH</button></div>`).join('')}
+function updatePackage(i){const a=getTreks();a[i].price=Number(document.getElementById('price_'+i).value||0);a[i].days=document.getElementById('days_'+i).value;saveTreks(a);renderTreks();renderPackages();alert('Package updated successfully.')}
+function renderTrekRows(){document.getElementById('trekRows').innerHTML=getTreks().map((t,i)=>`<tr><td>${t.name}</td><td>${t.type}</td><td>₹${Number(t.price||0).toLocaleString('en-IN')}</td><td><button class="bookingBtn" onclick="editTrek(${i})">EDIT</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="deleteTrek(${i})">DELETE</button></td></tr>`).join('')}
+function clearTrekForm(){document.getElementById('editTrekIndex').value=-1;['tName','tPlace','tDays','tAlt','tSeason','tTag','tImg'].forEach(id=>document.getElementById(id).value='');document.getElementById('tPrice').value=0}
+function editTrek(i){const t=getTreks()[i];document.getElementById('editTrekIndex').value=i;document.getElementById('tName').value=t.name;document.getElementById('tPlace').value=t.place;document.getElementById('tType').value=t.type;document.getElementById('tDifficulty').value=t.difficulty;document.getElementById('tDays').value=t.days;document.getElementById('tAlt').value=t.alt||'';document.getElementById('tSeason').value=t.season;document.getElementById('tPrice').value=t.price||0;document.getElementById('tTag').value=t.tag||'';document.getElementById('tImg').value=t.img||'';document.getElementById('trekMsg').textContent='Editing '+t.name}
+function saveTrek(e){e.preventDefault();const a=getTreks(),i=Number(document.getElementById('editTrekIndex').value);const x={name:tName.value,place:tPlace.value,type:tType.value,difficulty:tDifficulty.value,days:tDays.value,daysN:Number((tDays.value.match(/\d+/)||[0])[0]),alt:tAlt.value,season:tSeason.value,price:Number(tPrice.value||0),tag:tTag.value||tType.value.toUpperCase(),img:tImg.value||DEFAULTS.g1};if(i>=0)a[i]=x;else a.push(x);saveTreks(a);renderTreks();renderTrekRows();renderPackages();document.getElementById('trekMsg').textContent=x.name+' saved and published.';clearTrekForm()}
+function deleteTrek(i){if(confirm('Delete this trek from the website?')){const a=getTreks();a.splice(i,1);saveTreks(a);renderTreks();renderTrekRows();renderPackages()}}
+function loadContent(){const c=JSON.parse(localStorage.getItem('uh_content')||'{}');document.getElementById('cHeroTitle').value=c.heroTitle||'THE MOUNTAINS ARE WAITING.';document.getElementById('cHeroDesc').value=c.heroDesc||'Discover Uttarakhand through carefully selected Himalayan trails, alpine meadows, forests, passes and summit experiences.';document.getElementById('cAboutHeading').value=c.aboutHeading||'More than reaching the summit.';document.getElementById('cAboutDesc').value=c.aboutDesc||'Our focus is on the complete mountain experience — preparation, people, trails, local landscapes and responsible trekking.';document.getElementById('cPhone').value=c.phone||'+91 97204 51910';document.getElementById('cEmail').value=c.email||'shubhamnegi301298@gmail.com'}
+function saveContent(e){e.preventDefault();const c={heroTitle:cHeroTitle.value,heroDesc:cHeroDesc.value,aboutHeading:cAboutHeading.value,aboutDesc:cAboutDesc.value,phone:cPhone.value,email:cEmail.value};localStorage.setItem('uh_content',JSON.stringify(c));document.querySelector('.hero h1').innerHTML=c.heroTitle.replace(/(WAITING\.|HIMALAYAS)/,'<span>$1</span>');document.querySelector('.hero p').textContent=c.heroDesc;document.querySelector('#about h2').textContent=c.aboutHeading;document.querySelector('#about .heading p').textContent=c.aboutDesc;alert('Website data published.')}
+function changePassword(e){e.preventDefault();const x=document.getElementById('newAdminPw').value;if(x.length<6)return;localStorage.setItem('uh_admin_pw',x);document.getElementById('settingsMsg').textContent='Admin password updated.';e.target.reset()}
+function exportAdminData(){const data={bookings:bookings(),treks:getTreks(),visits:localStorage.getItem('uh_visits')||'0',content:JSON.parse(localStorage.getItem('uh_content')||'{}')};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='uttrakhand-hikes-admin-data.json';a.click()}
+/* ================= CLOUD VERSION ================= */
+const SUPABASE_URL = 'https://celemcifwoxfdldjdhnf.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_CKymswcWiBWO6pQ5C17zqw_ejE0Ub45';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let cloudReady=false;
+let currentAdminUser=null;
+let draftTreks=null;
+let pendingChanges=false;
+const pendingPhotos={};
+const pendingTrekImages={};
+let pendingContent=null;
+window.__treks = treks.map((t,i)=>({...t,id:slugId(t.name,i)}));
+window.__sitePhotos = {};
+function slugId(name,i){return String(name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+i}
+function normalizeTrek(t,i){return {id:t.id||slugId(t.name,i),sort_order:Number(t.sort_order??i),name:t.name,place:t.place||'',type:t.type||'Trek',difficulty:t.difficulty||'',days:t.days||'',daysN:Number(t.daysN ?? t.days_n ?? 0),alt:t.alt||'',season:t.season||'',tag:t.tag||'',price:Number(t.price||0),img:t.img||''}}
+function toDbTrek(t,i){const n=normalizeTrek(t,i);return {id:n.id,sort_order:n.sort_order,name:n.name,place:n.place,type:n.type,difficulty:n.difficulty,days:n.days,days_n:n.daysN,alt:n.alt,season:n.season,tag:n.tag,price:n.price,img:n.img}}
+function getTreks(){return window.__treks||treks}
+function markPending(msg='Unsaved changes'){pendingChanges=true;const el=document.getElementById('saveState');if(el)el.textContent='⚠ '+msg+' — press SAVE ALL CHANGES';const b=document.getElementById('saveAllBtn');if(b)b.disabled=false}
+function markSaved(){pendingChanges=false;const el=document.getElementById('saveState');if(el)el.textContent='✓ All changes saved to Supabase';const b=document.getElementById('saveAllBtn');if(b)b.disabled=false}
+function setLoginMsg(msg,ok=false){const el=document.getElementById('loginMsg');if(el){el.textContent=msg;el.style.color=ok?'#17613d':'#9a2d2d'}}
+async function loadCloudPublic(){
+  try{
+    const [tr,ct,ph]=await Promise.all([
+      sb.from('treks').select('*').order('sort_order',{ascending:true}),
+      sb.from('site_content').select('*').eq('id',1).maybeSingle(),
+      sb.from('site_photos').select('photo_key,image_url')
+    ]);
+    if(tr.error) throw tr.error;
+    if(Array.isArray(tr.data)&&tr.data.length){window.__treks=tr.data.map(normalizeTrek);renderTreks();}
+    if(ct.data){applyCloudContent(ct.data)}
+    if(!ph.error&&Array.isArray(ph.data)){window.__sitePhotos={};ph.data.forEach(x=>window.__sitePhotos[x.photo_key]=x.image_url);applyPhotos()}
+    cloudReady=true;
+  }catch(e){console.warn('Supabase public load:',e);cloudReady=false;renderTreks();applyPhotos();}
+}
+function applyCloudContent(c){
+  const title=c.hero_title||'THE MOUNTAINS ARE WAITING.';const desc=c.hero_desc||'';const ah=c.about_heading||'';const ad=c.about_desc||'';
+  const h=document.querySelector('.hero h1');if(h)h.innerHTML=title.replace(/(WAITING\.|HIMALAYAS)/,'<span>$1</span>');
+  const hp=document.querySelector('.hero p');if(hp&&desc)hp.textContent=desc;
+  const ahEl=document.querySelector('#about h2');if(ahEl&&ah)ahEl.textContent=ah;
+  const adEl=document.querySelector('#about .heading p');if(adEl&&ad)adEl.textContent=ad;
+  if(document.getElementById('cHeroTitle'))loadContent();
+}
+function getPhoto(k){return (pendingPhotos[k]||window.__sitePhotos[k]||DEFAULTS[k])}
+function applyPhotos(){
+ const hero=getPhoto('hero'),about=getPhoto('about');
+ const hs=document.querySelector('.hero');if(hs)hs.style.backgroundImage=`linear-gradient(90deg,rgba(4,23,19,.88),rgba(4,23,19,.45),rgba(4,23,19,.10)),url("${hero}")`;
+ const ai=document.getElementById('aboutImg');if(ai)ai.src=about;
+ ['g1','g2','g3','g4','g5'].forEach((k,i)=>{const el=document.getElementById('gallery'+(i+1));if(el)el.src=getPhoto(k)});
+ const s1=document.getElementById('story1');if(s1)s1.style.backgroundImage=`url("${getPhoto('story1')}")`;
+ const s2=document.getElementById('story2');if(s2)s2.style.backgroundImage=`url("${getPhoto('story2')}")`;
+ const map={hero:'adminHeroPreview',about:'adminAboutPreview',story1:'adminStory1Preview',story2:'adminStory2Preview',g1:'adminG1',g2:'adminG2',g3:'adminG3',g4:'adminG4',g5:'adminG5'};
+ Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.src=getPhoto(k)});
+}
+function openAdmin(){document.getElementById('adminModal').classList.add('show');document.getElementById('loginPanel').style.display='block';document.getElementById('adminPanel').style.display='none';document.getElementById('adminPassword').value='';setLoginMsg('')}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('show')}
+async function loginAdmin(){
+ const email=document.getElementById('adminEmail').value.trim(),pw=document.getElementById('adminPassword').value;
+ if(!email||!pw){setLoginMsg('Enter your Supabase admin email and password.');return}
+ setLoginMsg('Connecting to Supabase...',true);
+ const {data,error}=await sb.auth.signInWithPassword({email,password:pw});
+ if(error){setLoginMsg(error.message);return}
+ currentAdminUser=data.user;
+ try{await ensureSeeded(); await loadCloudPublic(); await loadCloudAdminData(); document.getElementById('loginPanel').style.display='none';document.getElementById('adminPanel').style.display='block';loadAdmin();renderTrekPhotoManager();markSaved();setLoginMsg('');}
+ catch(e){console.error(e);setLoginMsg('Connected, but admin data could not be loaded: '+e.message)}
+}
+async function ensureSeeded(){
+ const {data,error}=await sb.from('treks').select('id').limit(1);
+ if(error)throw error;
+ if(!data||!data.length){const rows=treks.map((t,i)=>normalizeTrek(t,i));const dbRows=rows.map(toDbTrek);const r=await sb.from('treks').upsert(dbRows,{onConflict:'id'});if(r.error)throw r.error;window.__treks=rows;renderTreks();}
+}
+async function loadCloudAdminData(){
+ const b=await sb.from('bookings').select('*').order('created_at',{ascending:false});if(b.error)throw b.error;window.__cloudBookings=b.data||[];
+ const c=await sb.from('site_content').select('*').eq('id',1).maybeSingle();if(c.error)throw c.error;window.__cloudContent=c.data||null;
+}
+async function adminLogout(){await sb.auth.signOut();currentAdminUser=null;closeAdmin()}
+function bookings(){return window.__cloudBookings||[]}
+async function submitBooking(e){
+ e.preventDefault();const t=getTreks().find(x=>x.name===document.getElementById('bTrek').value),n=Number(document.getElementById('bPersons').value||1);const id='UHK-'+Date.now().toString().slice(-8);
+ const row={id,name:document.getElementById('bName').value,phone:document.getElementById('bPhone').value,email:document.getElementById('bEmail').value,trek:t?.name||'',date:document.getElementById('bDate').value||null,persons:n,amount:Number(t?.price||0)*n,notes:document.getElementById('bNotes').value,status:'Pending',created_at:new Date().toISOString()};
+ const {error}=await sb.from('bookings').insert(row);if(error){document.getElementById('bookingMsg').textContent='Could not submit booking. Please try again.';console.error(error);return}
+ document.getElementById('bookingMsg').textContent='Booking request '+id+' submitted. Please wait for admin confirmation.';e.target.reset();document.getElementById('bPersons').value=1;
+}
+async function setBookingStatus(i,status){const a=bookings();const row=a[i];if(!row)return;const {data,error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',row.id).select().single();if(error){alert(error.message);return}a[i]=data;window.__cloudBookings=a;loadAdmin()}
+function renderBookings(){const rows=document.getElementById('bookingRows');if(!rows)return;rows.innerHTML=bookings().map((b,i)=>`<tr><td>${b.id}</td><td><b>${b.name}</b><br>${b.phone}<br>${b.email||''}</td><td>${b.trek}</td><td>${b.date||''}</td><td>${b.persons}</td><td>₹${Number(b.amount||0).toLocaleString('en-IN')}</td><td><span class="status ${(b.status||'Pending').toLowerCase()}">${b.status}</span><div style="margin-top:6px">${b.status==='Pending'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Approved')">APPROVE</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="setBookingStatus(${i},'Rejected')">REJECT</button>`:b.status==='Approved'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Completed')">COMPLETE</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="7">No customer bookings yet.</td></tr>'}
+function updateDashboard(){const b=bookings(),p=b.filter(x=>x.status==='Pending'),a=b.filter(x=>x.status==='Approved'||x.status==='Completed');document.getElementById('kBookings').textContent=b.length;document.getElementById('kPending').textContent=p.length;document.getElementById('kRevenue').textContent='₹'+a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN');document.getElementById('kVisitors').textContent='—';document.getElementById('adminSummary').textContent=`${b.length} booking request(s), ${p.length} awaiting approval and ₹${a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN')} in approved/completed booking value. Last refreshed ${new Date().toLocaleTimeString()}.`}
+function renderPackages(){document.getElementById('packageList').innerHTML=getTreks().map((t,i)=>`<div class="packageRow"><b>${t.name}</b><input id="price_${i}" type="number" min="0" value="${Number(t.price||0)}" placeholder="Price"><input id="days_${i}" value="${t.days||''}" placeholder="Duration"><button class="bookingBtn" onclick="updatePackage(${i})">QUEUE</button></div>`).join('')}
+function updatePackage(i){const a=getTreks().map(x=>({...x}));a[i].price=Number(document.getElementById('price_'+i).value||0);a[i].days=document.getElementById('days_'+i).value;window.__treks=a;markPending('Package changes queued');renderTreks();renderPackages();renderTrekRows();renderTrekPhotoManager()}
+function renderTrekRows(){document.getElementById('trekRows').innerHTML=getTreks().map((t,i)=>`<tr><td>${t.name}</td><td>${t.type}</td><td>₹${Number(t.price||0).toLocaleString('en-IN')}</td><td><button class="bookingBtn" onclick="editTrek(${i})">EDIT</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="deleteTrek(${i})">DELETE</button></td></tr>`).join('')}
+function clearTrekForm(){document.getElementById('editTrekIndex').value=-1;['tName','tPlace','tDays','tAlt','tSeason','tTag','tImg'].forEach(id=>document.getElementById(id).value='');document.getElementById('tPrice').value=0}
+function editTrek(i){const t=getTreks()[i];document.getElementById('editTrekIndex').value=i;document.getElementById('tName').value=t.name;document.getElementById('tPlace').value=t.place;document.getElementById('tType').value=t.type;document.getElementById('tDifficulty').value=t.difficulty;document.getElementById('tDays').value=t.days;document.getElementById('tAlt').value=t.alt||'';document.getElementById('tSeason').value=t.season;document.getElementById('tPrice').value=t.price||0;document.getElementById('tTag').value=t.tag||'';document.getElementById('tImg').value=t.img||'';document.getElementById('trekMsg').textContent='Editing '+t.name}
+function saveTrek(e){e.preventDefault();const a=getTreks().map(x=>({...x})),i=Number(document.getElementById('editTrekIndex').value);const old=i>=0?a[i]:null;const x={id:old?.id||slugId(document.getElementById('tName').value,i>=0?i:a.length),sort_order:i>=0?Number(old.sort_order||i):a.length,name:document.getElementById('tName').value,place:document.getElementById('tPlace').value,type:document.getElementById('tType').value,difficulty:document.getElementById('tDifficulty').value,days:document.getElementById('tDays').value,daysN:Number((document.getElementById('tDays').value.match(/\d+/)||[0])[0]),alt:document.getElementById('tAlt').value,season:document.getElementById('tSeason').value,price:Number(document.getElementById('tPrice').value||0),tag:document.getElementById('tTag').value||document.getElementById('tType').value.toUpperCase(),img:document.getElementById('tImg').value||DEFAULTS.g1};if(i>=0)a[i]=x;else a.push(x);window.__treks=a;markPending('Trek changes queued');renderTreks();renderTrekRows();renderPackages();renderTrekPhotoManager();document.getElementById('trekMsg').textContent=x.name+' queued. Press SAVE ALL CHANGES to publish.';clearTrekForm()}
+function deleteTrek(i){if(confirm('Delete this trek from the website when you save?')){const a=getTreks().map(x=>({...x}));a.splice(i,1);window.__treks=a;markPending('Trek deletion queued');renderTreks();renderTrekRows();renderPackages();renderTrekPhotoManager()}}
+function loadContent(){const c=window.__cloudContent||{};document.getElementById('cHeroTitle').value=c.hero_title||'THE MOUNTAINS ARE WAITING.';document.getElementById('cHeroDesc').value=c.hero_desc||'Discover Uttarakhand through carefully selected Himalayan trails, alpine meadows, forests, passes and summit experiences.';document.getElementById('cAboutHeading').value=c.about_heading||'More than reaching the summit.';document.getElementById('cAboutDesc').value=c.about_desc||'Our focus is on the complete mountain experience — preparation, people, trails, local landscapes and responsible trekking.';document.getElementById('cPhone').value=c.phone||'+91 97204 51910';document.getElementById('cEmail').value=c.email||'shubhamnegi301298@gmail.com'}
+function saveContent(e){e.preventDefault();pendingContent={id:1,hero_title:document.getElementById('cHeroTitle').value,hero_desc:document.getElementById('cHeroDesc').value,about_heading:document.getElementById('cAboutHeading').value,about_desc:document.getElementById('cAboutDesc').value,phone:document.getElementById('cPhone').value,email:document.getElementById('cEmail').value};markPending('Website content queued');applyCloudContent(pendingContent)}
+async function changePassword(e){e.preventDefault();const x=document.getElementById('newAdminPw').value;if(x.length<6)return;const {error}=await sb.auth.updateUser({password:x});document.getElementById('settingsMsg').textContent=error?error.message:'Admin password updated in Supabase.';if(!error)e.target.reset()}
+function exportAdminData(){const data={treks:getTreks(),bookings:bookings(),content:pendingContent||window.__cloudContent||{}};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='uttrakhand-hikes-admin-data.json';a.click()}
+function compressImage(file,maxW=1800,quality=.82){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const scale=Math.min(1,maxW/im.width),c=document.createElement('canvas');c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);const x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',quality))};im.onerror=reject;im.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
+function queueTrekImage(i,input){const f=input.files?.[0];if(!f)return;compressImage(f).then(data=>{pendingTrekImages[i]=data;const el=document.getElementById('trekPreview_'+i);if(el)el.src=data;markPending('Trek photo queued')}).catch(()=>alert('Could not read this image.'))}
+function queueTrekImageUrl(i,input){const v=input.value.trim();pendingTrekImages[i]=v;const el=document.getElementById('trekPreview_'+i);if(el)el.src=v||getTreks()[i].img;markPending('Trek photo URL queued')}
+function queueSiteImage(key,input){const f=input.files?.[0];if(!f)return;compressImage(f).then(data=>{pendingPhotos[key]=data;applyPhotos();markPending('Website photo queued')}).catch(()=>alert('Could not read this image.'))}
+function renderTrekPhotoManager(){const box=document.getElementById('trekPhotoManager');if(!box)return;box.className='trekPhotoGrid';box.innerHTML=getTreks().map((t,i)=>{const src=pendingTrekImages[i]||t.img||DEFAULTS.g1;return `<div class="trekPhotoCard"><b>${t.name}</b><div style="font-size:10px;color:#68736e">${t.place||''}</div><img id="trekPreview_${i}" src="${src}" alt="${t.name}"><input type="file" accept="image/*" onchange="queueTrekImage(${i},this)"><input type="url" placeholder="Or paste image URL" value="${(pendingTrekImages[i]||'').startsWith('data:')?'':(pendingTrekImages[i]||t.img||'')}" onchange="queueTrekImageUrl(${i},this)">${pendingTrekImages[i]?'<span class="pendingBadge">PENDING</span>':''}</div>`}).join('')}
+async function uploadDataUrl(key,dataUrl){const res=await fetch(dataUrl);const blob=await res.blob();const ext=blob.type.includes('png')?'png':'jpg';const path=`treks/${key}-${Date.now()}.${ext}`;const up=await sb.storage.from('trek-images').upload(path,blob,{contentType:blob.type||'image/jpeg',upsert:false});if(up.error)throw up.error;return sb.storage.from('trek-images').getPublicUrl(path).data.publicUrl}
+async function saveAllChanges(){
+ if(!currentAdminUser){alert('Please log in to the admin panel first.');return}
+ const btn=document.getElementById('saveAllBtn');btn.disabled=true;btn.textContent='SAVING...';
+ try{
+   const rows=getTreks().map((t,i)=>normalizeTrek(t,i));
+   for(const [i,val] of Object.entries(pendingTrekImages)){const idx=Number(i);if(val&&val.startsWith('data:'))rows[idx].img=await uploadDataUrl(rows[idx].id,val);else if(val)rows[idx].img=val}
+   rows.forEach((x,i)=>x.sort_order=i);
+   const tr=await sb.from('treks').upsert(rows.map(toDbTrek),{onConflict:'id'});if(tr.error)throw tr.error;
+   const oldIds=await sb.from('treks').select('id');if(oldIds.error)throw oldIds.error;const wanted=new Set(rows.map(x=>x.id));for(const old of (oldIds.data||[])){if(!wanted.has(old.id)){const d=await sb.from('treks').delete().eq('id',old.id);if(d.error)throw d.error}}
+   window.__treks=rows;
+   for(const [key,val] of Object.entries(pendingPhotos)){let url=val;if(val&&val.startsWith('data:'))url=await uploadDataUrl(key,val);const r=await sb.from('site_photos').upsert({photo_key:key,image_url:url,updated_at:new Date().toISOString()},{onConflict:'photo_key'});if(r.error)throw r.error;window.__sitePhotos[key]=url}
+   if(pendingContent){const r=await sb.from('site_content').upsert({...pendingContent,updated_at:new Date().toISOString()},{onConflict:'id'});if(r.error)throw r.error;window.__cloudContent=pendingContent;pendingContent=null}
+   Object.keys(pendingTrekImages).forEach(k=>delete pendingTrekImages[k]);Object.keys(pendingPhotos).forEach(k=>delete pendingPhotos[k]);
+   renderTreks();renderTrekRows();renderPackages();renderTrekPhotoManager();applyPhotos();loadContent();markSaved();alert('All changes have been saved to Supabase and published.');
+ }catch(e){console.error(e);alert('Save failed: '+e.message+'\n\nYour unsaved changes are still on this page.');markPending('Save failed — please try again')}
+ finally{btn.disabled=false;btn.textContent='💾 SAVE ALL CHANGES'}
+}
+function resetPhotos(){if(confirm('Reset website photos to their original defaults?')){Object.keys(DEFAULTS).forEach(k=>{delete pendingPhotos[k]});window.__sitePhotos={};applyPhotos();markPending('Photo reset queued')}}
+function loadAdmin(){renderBookings();renderPackages();renderTrekRows();loadContent();applyPhotos();updateDashboard();renderTrekPhotoManager()}
+
+// Start with the original trek library immediately, then replace it with cloud data if available.
+renderTreks();applyPhotos();markSaved();loadCloudPublic();
+setInterval(async()=>{if(currentAdminUser){try{await loadCloudAdminData();renderBookings();updateDashboard()}catch(e){console.warn(e)}}},30000);
+
+</script>
+</body>
+</html>
