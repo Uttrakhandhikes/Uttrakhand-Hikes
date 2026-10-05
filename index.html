@@ -205,13 +205,19 @@ footer{background:#061d18;color:#fff;padding:55px 0 25px}.footGrid{display:grid;
   <div class="panel" style="max-width:720px">
     <div class="panelTop"><div><h3>Book Your Himalayan Experience</h3><p style="font-size:12px;color:#68736e">Submit your request. Your booking will be confirmed after admin approval.</p></div><button class="close" onclick="closeBooking()">×</button></div>
     <form class="bookingForm" onsubmit="submitBooking(event)">
-      <div><label>Full Name *</label><input id="bName" required></div>
-      <div><label>Mobile Number *</label><input id="bPhone" required type="tel"></div>
-      <div><label>Email</label><input id="bEmail" type="email"></div>
+      <div><label>Full Name *</label><input id="bName" required autocomplete="name"></div>
+      <div><label>Mobile Number *</label><input id="bPhone" required type="tel" autocomplete="tel"></div>
+      <div><label>Email</label><input id="bEmail" type="email" autocomplete="email"></div>
+      <div><label>Address *</label><input id="bAddress" required autocomplete="street-address" placeholder="City / State / Full Address"></div>
       <div><label>Trek / Yatra *</label><select id="bTrek" required onchange="updateBookingTotal()"></select></div>
-      <div><label>Travel Date *</label><input id="bDate" required type="date"></div>
+      <div><label>Start Date *</label><input id="bDate" required type="date"></div>
+      <div><label>End Date</label><input id="bEndDate" type="date"></div>
       <div><label>No. of Persons *</label><input id="bPersons" required type="number" min="1" value="1" onchange="updateBookingTotal()"></div>
-      <div class="full"><label>Special Requirements</label><textarea id="bNotes" placeholder="Pickup, dietary needs, group details, etc."></textarea></div>
+      <div><label>Pickup / Meeting Point</label><input id="bPickup" placeholder="e.g. Dehradun / Haridwar / Hotel"></div>
+      <div><label>Emergency Contact</label><input id="bEmergency" type="tel" placeholder="Name + mobile number"></div>
+      <div><label>Trekking Experience</label><select id="bExperience"><option value="">Select</option><option>First trek</option><option>Beginner</option><option>Some experience</option><option>Experienced trekker</option><option>Expedition / high altitude experience</option></select></div>
+      <div><label>Preferred Contact</label><select id="bContact"><option>WhatsApp</option><option>Phone Call</option><option>Email</option></select></div>
+      <div class="full"><label>Additional Requirements</label><textarea id="bNotes" placeholder="Medical/fitness information, dietary needs, room preference, group details, questions, etc."></textarea></div>
       <div class="full" style="background:#f7f9f7;padding:14px;border-radius:10px"><b>Estimated Package Total: ₹<span id="bTotal">0</span></b><div style="font-size:10px;color:#68736e;margin-top:4px">Final amount is confirmed by UTTRAKHAND HIKES after availability review.</div></div>
       <div class="full"><button class="btn" style="background:var(--green);color:#fff;width:100%">SUBMIT BOOKING REQUEST</button></div>
       <p id="bookingMsg" class="adminMsg full"></p>
@@ -362,7 +368,7 @@ function renderTreks(){
   const filtered=getTreks().filter(t=>
     (!q||(t.name+" "+t.place+" "+t.type).toLowerCase().includes(q))&&(!d||t.difficulty===d)&&(!s||t.season===s)&&(!dur||(dur==="7"?Number(t.daysN)>=7:Number(t.daysN)===Number(dur)))&&(!type||t.type===type));
   const grid=document.getElementById('trekGrid');grid.innerHTML='';
-  filtered.forEach(t=>{grid.innerHTML+=`<article class="card"><div class="cardImg"><img src="${t.img}" alt="${t.name}"><span class="pill">${t.tag||t.type}</span></div><div class="cardBody"><h3>${t.name}</h3><div class="place">📍 ${t.place} · ${t.type}</div><div class="meta"><div><b>${t.difficulty}</b><span>Difficulty</span></div><div><b>${t.days}</b><span>Duration</span></div><div><b>${t.alt||'—'}</b><span>Altitude</span></div></div><div class="cardFooter"><span class="details">${t.season} · ₹${Number(t.price||0).toLocaleString('en-IN')}</span><button class="bookingBtn" onclick="openBooking(${JSON.stringify(t.name)})">BOOK NOW</button></div></div></article>`});
+  filtered.forEach(t=>{grid.innerHTML+=`<article class="card"><div class="cardImg"><img src="${t.img}" alt="${t.name}"><span class="pill">${t.tag||t.type}</span></div><div class="cardBody"><h3>${t.name}</h3><div class="place">📍 ${t.place} · ${t.type}</div><div class="meta"><div><b>${t.difficulty}</b><span>Difficulty</span></div><div><b>${t.days}</b><span>Duration</span></div><div><b>${t.alt||'—'}</b><span>Altitude</span></div></div><div class="cardFooter"><span class="details">${t.season} · ₹${Number(t.price||0).toLocaleString('en-IN')}</span><button class="bookingBtn" data-trek-name="${String(t.name).replace(/"/g,'&quot;')}">BOOK NOW</button></div></div></article>`});
   document.getElementById('empty').style.display=filtered.length?'none':'block';
 }
 function clearFilters(){['search','difficulty','season','duration','type'].forEach(id=>document.getElementById(id).value='');renderTreks()}
@@ -504,14 +510,43 @@ async function loadCloudAdminData(){
 }
 async function adminLogout(){await sb.auth.signOut();currentAdminUser=null;closeAdmin()}
 function bookings(){return window.__cloudBookings||[]}
+function bookingField(id){const el=document.getElementById(id);return el?el.value.trim():''}
+function buildBookingNotes(){
+  const details={address:bookingField('bAddress'),end_date:bookingField('bEndDate'),pickup:bookingField('bPickup'),emergency_contact:bookingField('bEmergency'),experience:bookingField('bExperience'),preferred_contact:bookingField('bContact'),additional_requirements:bookingField('bNotes')};
+  return JSON.stringify(details);
+}
+function bookingDetails(row){
+  try{return typeof row.notes==='string'&&row.notes.trim().startsWith('{')?JSON.parse(row.notes):{additional_requirements:row.notes||''}}catch(e){return {additional_requirements:row.notes||''}}
+}
+function buildBookingWhatsApp(row){
+  const d=bookingDetails(row);
+  return `*UTTRAKHAND HIKES — NEW BOOKING REQUEST*\n\n*Booking ID:* ${row.id||''}\n*Name:* ${row.name||''}\n*Mobile:* ${row.phone||''}\n*Email:* ${row.email||''}\n*Address:* ${d.address||''}\n*Trek/Yatra:* ${row.trek||''}\n*Start Date:* ${row.date||''}\n*End Date:* ${d.end_date||'Not specified'}\n*Persons:* ${row.persons||''}\n*Pickup/Meeting:* ${d.pickup||'Not specified'}\n*Emergency Contact:* ${d.emergency_contact||'Not specified'}\n*Trekking Experience:* ${d.experience||'Not specified'}\n*Preferred Contact:* ${d.preferred_contact||'WhatsApp'}\n*Estimated Amount:* ₹${Number(row.amount||0).toLocaleString('en-IN')}\n*Requirements:* ${d.additional_requirements||'None'}\n\n*Status:* ${row.status||'Pending'}`;
+}
+function openBookingWhatsApp(row){window.open('https://wa.me/919720451910?text='+encodeURIComponent(buildBookingWhatsApp(row)),'_blank','noopener,noreferrer')}
 async function submitBooking(e){
- e.preventDefault();const t=getTreks().find(x=>x.name===document.getElementById('bTrek').value),n=Number(document.getElementById('bPersons').value||1);const id='UHK-'+Date.now().toString().slice(-8);
- const row={id,name:document.getElementById('bName').value,phone:document.getElementById('bPhone').value,email:document.getElementById('bEmail').value,trek:t?.name||'',date:document.getElementById('bDate').value||null,persons:n,amount:Number(t?.price||0)*n,notes:document.getElementById('bNotes').value,status:'Pending',created_at:new Date().toISOString()};
- const {error}=await sb.from('bookings').insert(row);if(error){document.getElementById('bookingMsg').textContent='Could not submit booking. Please try again.';console.error(error);return}
- document.getElementById('bookingMsg').textContent='Booking request '+id+' submitted. Please wait for admin confirmation.';e.target.reset();document.getElementById('bPersons').value=1;
+ e.preventDefault();
+ const msg=document.getElementById('bookingMsg');msg.style.color='#68736e';msg.textContent='Submitting booking request to Supabase...';
+ const t=getTreks().find(x=>x.name===document.getElementById('bTrek').value),n=Math.max(1,Number(document.getElementById('bPersons').value||1));
+ if(!t){msg.style.color='#9a2d2d';msg.textContent='Please select a valid trek.';return}
+ const id='UHK-'+Date.now().toString().slice(-8);
+ const row={id,name:bookingField('bName'),phone:bookingField('bPhone'),email:bookingField('bEmail'),trek:t.name,date:bookingField('bDate')||null,persons:n,amount:Number(t.price||0)*n,notes:buildBookingNotes(),status:'Pending',created_at:new Date().toISOString()};
+ try{
+   const {data,error}=await sb.from('bookings').insert(row).select().single();
+   if(error)throw error;
+   const saved=data||row;
+   msg.style.color='#17613d';
+   msg.innerHTML='Booking <b>'+saved.id+'</b> saved permanently in Supabase. Opening WhatsApp with the booking details...';
+   openBookingWhatsApp(saved);
+   e.target.reset();document.getElementById('bPersons').value=1;updateBookingTotal();
+ }catch(error){
+   console.error(error);msg.style.color='#9a2d2d';msg.textContent='Booking could not be saved to Supabase: '+(error.message||'Unknown error');
+ }
 }
 async function setBookingStatus(i,status){const a=bookings();const row=a[i];if(!row)return;const {data,error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',row.id).select().single();if(error){alert(error.message);return}a[i]=data;window.__cloudBookings=a;loadAdmin()}
-function renderBookings(){const rows=document.getElementById('bookingRows');if(!rows)return;rows.innerHTML=bookings().map((b,i)=>`<tr><td>${b.id}</td><td><b>${b.name}</b><br>${b.phone}<br>${b.email||''}</td><td>${b.trek}</td><td>${b.date||''}</td><td>${b.persons}</td><td>₹${Number(b.amount||0).toLocaleString('en-IN')}</td><td><span class="status ${(b.status||'Pending').toLowerCase()}">${b.status}</span><div style="margin-top:6px">${b.status==='Pending'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Approved')">APPROVE</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="setBookingStatus(${i},'Rejected')">REJECT</button>`:b.status==='Approved'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Completed')">COMPLETE</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="7">No customer bookings yet.</td></tr>'}
+function renderBookings(){
+ const rows=document.getElementById('bookingRows');if(!rows)return;
+ rows.innerHTML=bookings().map((b,i)=>{const d=bookingDetails(b);return `<tr><td>${b.id}</td><td><b>${b.name}</b><br>${b.phone}<br>${b.email||''}<br><small>${d.address||''}</small></td><td>${b.trek}</td><td>${b.date||''}${d.end_date?' → '+d.end_date:''}</td><td>${b.persons}</td><td>₹${Number(b.amount||0).toLocaleString('en-IN')}</td><td><span class="status ${(b.status||'Pending').toLowerCase()}">${b.status}</span><div style="margin-top:6px">${b.status==='Pending'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Approved')">APPROVE</button> <button class="bookingBtn" style="background:#9a2d2d" onclick="setBookingStatus(${i},'Rejected')">REJECT</button>`:b.status==='Approved'?`<button class="bookingBtn" onclick="setBookingStatus(${i},'Completed')">COMPLETE</button>`:''} <button class="bookingBtn" style="background:#17613d" onclick="openBookingWhatsApp(bookings()[${i}])">WHATSAPP</button></div><div style="font-size:10px;color:#68736e;margin-top:6px">Pickup: ${d.pickup||'—'} · Emergency: ${d.emergency_contact||'—'} · Experience: ${d.experience||'—'}<br>Requirements: ${d.additional_requirements||'—'}</div></td></tr>`}).join('')||'<tr><td colspan="7">No customer bookings yet.</td></tr>'
+}
 function updateDashboard(){const b=bookings(),p=b.filter(x=>x.status==='Pending'),a=b.filter(x=>x.status==='Approved'||x.status==='Completed');document.getElementById('kBookings').textContent=b.length;document.getElementById('kPending').textContent=p.length;document.getElementById('kRevenue').textContent='₹'+a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN');document.getElementById('kVisitors').textContent='—';document.getElementById('adminSummary').textContent=`${b.length} booking request(s), ${p.length} awaiting approval and ₹${a.reduce((n,x)=>n+Number(x.amount||0),0).toLocaleString('en-IN')} in approved/completed booking value. Last refreshed ${new Date().toLocaleTimeString()}.`}
 function renderPackages(){document.getElementById('packageList').innerHTML=getTreks().map((t,i)=>`<div class="packageRow"><b>${t.name}</b><input id="price_${i}" type="number" min="0" value="${Number(t.price||0)}" placeholder="Price"><input id="days_${i}" value="${t.days||''}" placeholder="Duration"><button class="bookingBtn" onclick="updatePackage(${i})">QUEUE</button></div>`).join('')}
 function updatePackage(i){const a=getTreks().map(x=>({...x}));a[i].price=Number(document.getElementById('price_'+i).value||0);a[i].days=document.getElementById('days_'+i).value;window.__treks=a;markPending('Package changes queued');renderTreks();renderPackages();renderTrekRows();renderTrekPhotoManager()}
@@ -554,6 +589,24 @@ function loadAdmin(){renderBookings();renderPackages();renderTrekRows();loadCont
 renderTreks();applyPhotos();markSaved();loadCloudPublic();
 setInterval(async()=>{if(currentAdminUser){try{await loadCloudAdminData();renderBookings();updateDashboard()}catch(e){console.warn(e)}}},30000);
 
+</script>
+
+<script>
+/* ===== PERMANENT SUPABASE BOOKING / DATA PATCH ===== */
+(function(){
+  const originalLoadCloudPublic=window.loadCloudPublic;
+  window.__supabasePersistence={enabled:true};
+  // Make the booking button independent of legacy/localStorage code.
+  document.addEventListener('click',function(ev){
+    const btn=ev.target.closest('.bookingBtn');
+    if(!btn || btn.dataset.bookingBound==='1') return;
+    if((btn.textContent||'').trim().toUpperCase()!=='BOOK NOW') return;
+    btn.dataset.bookingBound='1';
+    ev.preventDefault();ev.stopPropagation();
+    const trekName=btn.getAttribute('data-trek-name')||btn.closest('.card')?.querySelector('h3')?.textContent?.trim()||'';
+    if(typeof window.openBooking==='function') window.openBooking(trekName);
+  },true);
+})();
 </script>
 </body>
 </html>
