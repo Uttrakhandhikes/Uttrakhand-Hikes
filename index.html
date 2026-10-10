@@ -531,15 +531,21 @@ async function submitBooking(e){
  const id='UHK-'+Date.now().toString().slice(-8);
  const row={id,name:bookingField('bName'),phone:bookingField('bPhone'),email:bookingField('bEmail'),trek:t.name,date:bookingField('bDate')||null,persons:n,amount:Number(t.price||0)*n,notes:buildBookingNotes(),status:'Pending',created_at:new Date().toISOString()};
  try{
-   const {data,error}=await sb.from('bookings').insert(row).select().single();
+   // Public visitors may be allowed to INSERT booking requests without SELECT access.
+   // Do not chain .select() here: that would also require a public SELECT policy on customer data.
+   const {error}=await sb.from('bookings').insert(row);
    if(error)throw error;
-   const saved=data||row;
+   const saved=row;
+   // Update the current page's in-memory list without exposing other customers' bookings.
+   if(Array.isArray(window.__cloudBookings)&&currentAdminUser){window.__cloudBookings.unshift(saved);renderBookings();updateDashboard();}
    msg.style.color='#17613d';
-   msg.innerHTML='Booking <b>'+saved.id+'</b> saved permanently in Supabase. Opening WhatsApp with the booking details...';
-   openBookingWhatsApp(saved);
+   msg.textContent='Booking '+saved.id+' submitted successfully. Your request is saved; UTTRAKHAND HIKES will contact you after review.';
+   // WhatsApp is optional follow-up; the booking is already saved before this is offered.
+   const wa=document.createElement('a');wa.href='https://wa.me/919720451910?text='+encodeURIComponent(buildBookingWhatsApp(saved));wa.target='_blank';wa.rel='noopener noreferrer';wa.textContent='Send booking details on WhatsApp (optional)';wa.style.cssText='display:inline-block;margin-top:8px;color:#17613d;font-weight:700';msg.appendChild(document.createElement('br'));msg.appendChild(wa);
    e.target.reset();document.getElementById('bPersons').value=1;updateBookingTotal();
  }catch(error){
-   console.error(error);msg.style.color='#9a2d2d';msg.textContent='Booking could not be saved to Supabase: '+(error.message||'Unknown error');
+   console.error('Supabase booking insert failed:',error);msg.style.color='#9a2d2d';
+   msg.textContent='Booking could not be saved: '+(error.message||'Unknown error')+'. Please contact us on WhatsApp at +91 97204 51910 and mention your selected trek.';
  }
 }
 async function setBookingStatus(i,status){const a=bookings();const row=a[i];if(!row)return;const {data,error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',row.id).select().single();if(error){alert(error.message);return}a[i]=data;window.__cloudBookings=a;loadAdmin()}
